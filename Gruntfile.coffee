@@ -2,6 +2,8 @@ module.exports = (grunt) ->
   grunt.initConfig
     coffee:
       client:
+        options:
+          sourceMap: true
         expand: true,
         cwd: 'client'
         src: ['**/*.coffee']

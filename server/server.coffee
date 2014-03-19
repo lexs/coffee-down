@@ -28,4 +28,7 @@ routes (route, f) ->
 
 app.use '/', (express.static __dirname + '/public')
 
+if process.env.DEBUG
+  app.use '/client', (express.static 'client')
+
 app.listen port
