@@ -12,7 +12,7 @@ require.config
     marked: '//cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.min',
     parse: '//www.parsecdn.com/js/parse-1.2.18.min'
 
-require ['backbone', 'parse', 'router', 'app'], (Backbone, Parse, Router, App) ->
+require ['backbone', 'parse', 'router', 'app', 'routes'], (Backbone, Parse, Router, App, routes) ->
   Parse.initialize 'TSv2DbVgg5lKFMfluGhm9Gf1Co6lBKNmMadRvtCM', 'h4F4ndW0aTzH0FU1claFa2N1k4Hcui7xibEcaE2o'
-  App.router = new Router()
+  App.router = new Router(routes)
   Backbone.history.start {pushState: true}
