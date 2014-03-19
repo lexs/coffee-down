@@ -24,18 +24,19 @@ if process.env.DEBUG
   app.use express.logger()
 port = process.env.PORT || 8080
 
-routes (route, f) ->
-  app.get route, (req, res) ->
-    renderComponent = (component) ->
-      data = template.index body: (React.renderComponentToString component)
-      res.send data
+for route, f of routes
+  do (route, f) ->
+    app.get route, (req, res) ->
+      renderComponent = (component) ->
+        data = template.index body: (React.renderComponentToString component)
+        res.send data
 
-    response = f (getArgs req)...
-    if Parse.Promise.is response
-      response.then renderComponent, (err) ->
-        res.send 500, err
-    else
-      renderComponent response
+      response = f (getArgs req)...
+      if Parse.Promise.is response
+        response.then renderComponent, (err) ->
+          res.send 500, err
+      else
+        renderComponent response
 
 app.use '/', (express.static __dirname + '/public')
 
