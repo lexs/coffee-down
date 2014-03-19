@@ -1,26 +1,11 @@
-define ['index', 'item', 'views/document'], (Index, Item, Document) ->
+define ['p', 'model', 'index', 'item', 'views/document'], (Parse, model, Index, Item, Document) ->
   (route) ->
     route '/', -> Index()
     route '/item/:id', (id) ->
-      Document {text: '''
-        A First Level Header
-        ====================
+      query = new Parse.Query model.Document
+      (query.get id).then (document) =>
+        Document loaded: true, document: document
+      .then null, (err) ->
+        Document loaded: false
 
-        A Second Level Header
-        ---------------------
 
-        Now is the time for all good men to come to
-        the aid of their country. This is just a
-        regular paragraph.
-
-        The quick brown fox jumped over the lazy
-        dog's back.
-
-        ### Header 3
-
-        > This is a blockquote.
-        >
-        > This is the second paragraph in the blockquote.
-        >
-        > ## This is an H2 in a blockquote
-      '''}

@@ -6,7 +6,7 @@ define ['react', 'views'], (React, views) ->
     render: ->
       (div {},
         (h3 {}, 'Index'),
-        (Link {href: '/item/5'}, 'Go to item')
+        (Link {href: '/item/rv92lUnoKO'}, 'Go to item')
       )
 
 

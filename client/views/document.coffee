@@ -1,11 +1,18 @@
-define ['react', 'markdown'], (React, markdown) ->
+define ['react', 'p', 'markdown', 'model'], (React, Parse, markdown, model) ->
   {div, span, h2} = React.DOM
 
   React.createClass
-    getInitialState: ->
-      html: markdown(@props.text)
+    #getInitialState: ->
+    #  loaded: false
+      #html: markdown(@props.text)
+    #componentDidMount: ->
+
     render: ->
-      (div {},
-        (h2 {}, 'Title')
-        (span {dangerouslySetInnerHTML: {__html: @state.html}})
-      )
+      if @props.loaded
+        text = @props.document.get('text')
+        (div {},
+          (h2 {}, 'Title')
+          (span {dangerouslySetInnerHTML: {__html: markdown(text)}})
+        )
+      else
+        (div {}, 'Error')
