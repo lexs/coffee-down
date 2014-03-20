@@ -5,5 +5,5 @@ define ['react', 'app'], (React, App) ->
     render: ->
       (a {href: @props.href, onClick: this.onClick}, @props.children)
     onClick: (e) ->
-      App.router.navigate @props.href, {trigger: true}
+      App.navigate @props.href
       e.preventDefault()
