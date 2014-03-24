@@ -23,6 +23,17 @@ module.exports = (grunt) ->
         files:
           'build/public/css/main.css': 'assets/**/*.less'
 
+    requirejs:
+      production:
+        options:
+          baseUrl: 'build/public/js'
+          mainConfigFile: 'build/public/js/main.js'
+          name: 'main'
+          out: 'build/public/js/optimized.js'
+          optimize: 'uglify2'
+
+    clean: ['build/']
+
     watch:
       scripts:
         files: ['**/*.coffee']
@@ -32,22 +43,28 @@ module.exports = (grunt) ->
         tasks: ['less']
 
     nodemon:
-      dev:
+      development:
         script: 'build/server.js'
         options:
           env:
             DEBUG: true
 
     concurrent:
-      dev: ['watch', 'nodemon']
+      development: ['watch', 'nodemon']
       options:
         logConcurrentOutput: true
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
-  grunt.loadNpmTasks  'grunt-contrib-less'
+  grunt.loadNpmTasks 'grunt-contrib-less'
+  grunt.loadNpmTasks 'grunt-contrib-requirejs'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-nodemon'
   grunt.loadNpmTasks 'grunt-concurrent'
+  grunt.loadNpmTasks 'grunt-contrib-clean'
 
-  grunt.registerTask 'default', ['coffee']
-  grunt.registerTask 'dev', ['coffee', 'less', 'concurrent:dev']
+  grunt.registerTask 'build', ['coffee', 'less', 'requirejs:production']
+  grunt.registerTask 'dev', ['coffee', 'less', 'concurrent:development']
+
+  grunt.registerTask 'heroku:production', 'build'
+
+  grunt.registerTask 'default', 'build'

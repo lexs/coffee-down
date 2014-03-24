@@ -16,11 +16,13 @@ Parse.initialize 'TSv2DbVgg5lKFMfluGhm9Gf1Co6lBKNmMadRvtCM', 'h4F4ndW0aTzH0FU1cl
 template =
   index: Handlebars.compile (fs.readFileSync 'assets/template/index.html', encoding: 'utf-8')
 
+debug = process.env.NODE_ENV != 'production'
+
 getArgs = (req) -> req.params[key.name] for key in req.route.keys
 
 app = express()
 
-if process.env.DEBUG
+if debug
   app.use express.logger()
 port = process.env.PORT || 8080
 
@@ -28,7 +30,7 @@ for route, f of routes
   do (route, f) ->
     app.get route, (req, res) ->
       renderComponent = (component) ->
-        data = template.index content: (React.renderComponentToString component)
+        data = template.index content: (React.renderComponentToString component), production: !debug
         res.send data
 
       response = f (getArgs req)...
