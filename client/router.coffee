@@ -14,4 +14,4 @@ define ['backbone', 'react'], (Backbone, React) ->
               @renderComponent response
 
     renderComponent: (component) ->
-      React.renderComponent component, document.body
+      React.renderComponent component, document.getElementById 'content'

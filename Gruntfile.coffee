@@ -16,10 +16,20 @@ module.exports = (grunt) ->
         dest: 'build/'
         ext: '.js'
 
+    less:
+      development:
+        options:
+          paths: ['bower_components']
+        files:
+          'build/public/css/main.css': 'assets/**/*.less'
+
     watch:
       scripts:
         files: ['**/*.coffee']
         tasks: ['coffee']
+      less:
+        files: ['assets/**/*.less']
+        tasks: ['less']
 
     nodemon:
       dev:
@@ -34,9 +44,10 @@ module.exports = (grunt) ->
         logConcurrentOutput: true
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks  'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-nodemon'
   grunt.loadNpmTasks 'grunt-concurrent'
 
   grunt.registerTask 'default', ['coffee']
-  grunt.registerTask 'dev', ['coffee', 'concurrent:dev']
+  grunt.registerTask 'dev', ['coffee', 'less', 'concurrent:dev']

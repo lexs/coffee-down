@@ -28,7 +28,7 @@ for route, f of routes
   do (route, f) ->
     app.get route, (req, res) ->
       renderComponent = (component) ->
-        data = template.index body: (React.renderComponentToString component)
+        data = template.index content: (React.renderComponentToString component)
         res.send data
 
       response = f (getArgs req)...

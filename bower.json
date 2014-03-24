@@ -1,0 +1,25 @@
+{
+  "name": "coffe-down",
+  "version": "0.0.0",
+  "homepage": "https://github.com/lexs/coffee-down",
+  "authors": [
+    "Alexander Blom <me@alexanderblom.se>"
+  ],
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "~3.0.0",
+    "bootstrap": "~3.1.1"
+  }
+}

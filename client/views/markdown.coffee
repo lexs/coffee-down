@@ -2,13 +2,9 @@ define ['react', 'markdown'], (React, markdown) ->
   {div, span} = React.DOM
 
   React.createClass
-    getInitialState: ->
-      text: @getText()
-    componentDidMount: ->
-      @props.document.on 'change', =>
-        @setState text: @getText()
     render: ->
-      (div {className: 'markdown'},
-        (span {dangerouslySetInnerHTML: {__html: markdown(@state.text)}})
+      (div
+        className: 'markdown'
+        dangerouslySetInnerHTML:
+          __html: markdown @props.text
       )
-    getText: -> @props.document.get('text')
