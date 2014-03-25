@@ -1,4 +1,5 @@
 {
+  "engine": "node 0.10.26",
   "devDependencies": {
     "grunt-contrib-coffee": "~0.10.1",
     "grunt": "~0.4.4",
