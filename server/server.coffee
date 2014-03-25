@@ -6,7 +6,7 @@ requirejs.config
 fs = require 'fs'
 express = require 'express'
 Handlebars = require 'handlebars'
-React = require 'React'
+React = require 'react'
 Parse = requirejs 'p'
 
 routes = requirejs 'routes'
